@@ -18,5 +18,6 @@ func main() {
 	if command == "help" {
 	} else if command == "scan" {
 	} else if command == "produce" {
+		ProduceFakeProject()
 	}
 }
