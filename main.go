@@ -17,6 +17,7 @@ func main() {
 
 	if command == "help" {
 	} else if command == "scan" {
+		Scan(os.Args[2])
 	} else if command == "produce" {
 		ProduceFakeProject()
 	}
