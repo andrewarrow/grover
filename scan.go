@@ -1,6 +1,7 @@
 package main
 
 import (
+	"SwiftExplorer/swift"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -13,8 +14,9 @@ func Scan(dir string) {
 		if err != nil {
 			return err
 		}
-		if strings.Index(path, "/.git") == -1 {
-			fmt.Println(path, info.Size())
+		if strings.HasSuffix(path, ".swift") {
+			fmt.Println(path)
+			swift.ReadFile(path)
 		}
 		return nil
 	}
