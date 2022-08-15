@@ -16,8 +16,8 @@ func Scan(dir string) {
 		}
 		if strings.HasSuffix(path, ".swift") {
 			fmt.Println(path)
-			items := swift.ReadFile(path)
-			swift.ProcessItems(items)
+			characters := swift.ReadFile(path)
+			swift.ProcessCharacters(characters)
 		}
 		return nil
 	}
