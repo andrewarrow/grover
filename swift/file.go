@@ -6,11 +6,12 @@ import (
 	"strings"
 )
 
-func ReadFile(path string) {
+func ReadFile(path string) []string {
 	asBytes, _ := ioutil.ReadFile(path)
 	asString := string(asBytes)
 	asLines := strings.Split(asString, "\n")
 
+	buff := []string{}
 	for _, line := range asLines {
 		trimmed := strings.TrimSpace(line)
 		if strings.HasPrefix(trimmed, "//") {
@@ -22,8 +23,9 @@ func ReadFile(path string) {
 
 		for _, c := range trimmed {
 			char := fmt.Sprintf("%c", c)
-			fmt.Printf(char)
+			buff = append(buff, char)
 		}
-		fmt.Printf(" ")
+		buff = append(buff, " ")
 	}
+	return buff
 }
