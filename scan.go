@@ -16,11 +16,15 @@ func Scan(dir string) {
 		}
 		if strings.HasSuffix(path, ".swift") {
 			fmt.Println(path)
-			characters := swift.ReadFile(path)
-			swift.ProcessCharacters(characters)
+			OneFile(path)
 		}
 		return nil
 	}
 
 	filepath.Walk(dir, f)
+}
+
+func OneFile(path string) {
+	characters := swift.ReadFile(path)
+	swift.ProcessCharacters(characters)
 }
