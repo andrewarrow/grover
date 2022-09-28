@@ -2,6 +2,7 @@ package scan
 
 import (
 	"fmt"
+	"grover/screen"
 	"os"
 	"path/filepath"
 	"strings"
@@ -24,6 +25,7 @@ func Scan(dir, filter string) {
 	}
 
 	filepath.Walk(dir, f)
+	screen.Filter()
 }
 
 func OneFile(path string) {
