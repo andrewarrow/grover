@@ -111,8 +111,10 @@ func selectedList() *widgets.List {
 func (fs *FilterScreen) handleEnter() {
 	p := fs.Paths[files.SelectedRow]
 	lines := code.ReadFile(p.Fullpath)
-	for i := 0; i < 10; i++ {
-		area.Rows = append(area.Rows, syntax.Highlight(lines[i]))
+	area.Rows = []string{}
+	//for i := 0; i < 10; i++ {
+	for _, line := range lines {
+		area.Rows = append(area.Rows, syntax.Highlight(line))
 	}
 }
 
