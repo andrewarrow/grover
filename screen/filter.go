@@ -15,7 +15,7 @@ var area = widgets.NewList()
 var tab = "flavors"
 var insertMode = false
 
-func Filter() {
+func Filter(paths []*Path) {
 	if err := ui.Init(); err != nil {
 		log.Fatalf("failed to initialize termui: %v", err)
 	}

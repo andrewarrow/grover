@@ -11,6 +11,8 @@ import (
 func Scan(dir, filter string) {
 
 	lowerFilter := strings.ToLower(filter)
+	paths := []*screen.Path{}
+
 	f := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -19,13 +21,14 @@ func Scan(dir, filter string) {
 			lower := strings.ToLower(path)
 			if strings.Contains(lower, lowerFilter) {
 				fmt.Println(path)
+				paths = append(paths, screen.NewPath(path))
 			}
 		}
 		return nil
 	}
 
 	filepath.Walk(dir, f)
-	screen.Filter()
+	screen.Filter(paths)
 }
 
 func OneFile(path string) {
