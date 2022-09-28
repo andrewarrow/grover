@@ -4,6 +4,6 @@ import "fmt"
 
 func PrintHelp() {
 	fmt.Println("")
-	fmt.Println("  SwiftExplorer help")
+	fmt.Println("  grover help")
 	fmt.Println("")
 }
