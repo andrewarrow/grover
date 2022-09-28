@@ -24,13 +24,17 @@ func Filter(paths []*Path) {
 	setListColors(files)
 	setListColors(area)
 
+	for _, p := range paths {
+		files.Rows = append(files.Rows, p.Filename)
+	}
+
 	termWidth, termHeight := ui.TerminalDimensions()
 	grid.SetRect(0, 0, termWidth, termHeight)
 
 	grid.Set(
 		ui.NewRow(1.0,
-			ui.NewCol(0.16, files),
-			ui.NewCol(0.84, area),
+			ui.NewCol(0.33, files),
+			ui.NewCol(0.66, area),
 		),
 	)
 

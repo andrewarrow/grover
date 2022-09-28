@@ -1,4 +1,4 @@
-package swift
+package code
 
 import (
 	"fmt"
