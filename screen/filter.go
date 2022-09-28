@@ -3,6 +3,7 @@ package screen
 import (
 	"fmt"
 	"grover/code"
+	"grover/syntax"
 	"log"
 	"os"
 
@@ -110,7 +111,9 @@ func selectedList() *widgets.List {
 func (fs *FilterScreen) handleEnter() {
 	p := fs.Paths[files.SelectedRow]
 	lines := code.ReadFile(p.Fullpath)
-	area.Rows = append(area.Rows, lines[0])
+	for i := 0; i < 10; i++ {
+		area.Rows = append(area.Rows, syntax.Highlight(lines[i]))
+	}
 }
 
 func setListColors(s *widgets.List) {
