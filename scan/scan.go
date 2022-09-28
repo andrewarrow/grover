@@ -7,14 +7,18 @@ import (
 	"strings"
 )
 
-func Scan(dir string) {
+func Scan(dir, filter string) {
 
+	lowerFilter := strings.ToLower(filter)
 	f := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
 		if strings.HasSuffix(path, ".kt") {
-			fmt.Println(path)
+			lower := strings.ToLower(path)
+			if strings.Contains(lower, lowerFilter) {
+				fmt.Println(path)
+			}
 		}
 		return nil
 	}

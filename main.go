@@ -2,6 +2,7 @@ package main
 
 import (
 	"grover/scan"
+	"grover/util"
 	"math/rand"
 	"os"
 	"time"
@@ -18,6 +19,8 @@ func main() {
 
 	if command == "help" {
 	} else if command == "scan" {
-		scan.Scan(os.Args[2])
+		dir := util.GetArg(2)
+		filter := util.GetArg(3)
+		scan.Scan(dir, filter)
 	}
 }
