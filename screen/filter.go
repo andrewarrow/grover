@@ -2,6 +2,7 @@ package screen
 
 import (
 	"fmt"
+	"grover/code"
 	"log"
 	"os"
 
@@ -15,11 +16,18 @@ var area = widgets.NewList()
 var tab = "flavors"
 var insertMode = false
 
+type FilterScreen struct {
+	Paths []*Path
+}
+
 func Filter(paths []*Path) {
 	if err := ui.Init(); err != nil {
 		log.Fatalf("failed to initialize termui: %v", err)
 	}
 	defer ui.Close()
+
+	fs := FilterScreen{}
+	fs.Paths = paths
 
 	setListColors(files)
 	setListColors(area)
@@ -45,7 +53,7 @@ func Filter(paths []*Path) {
 		if insertMode {
 			handleInsert(e)
 		} else {
-			normalEvents(e)
+			fs.normalEvents(e)
 		}
 		ui.Render(grid)
 	}
@@ -60,7 +68,7 @@ func handleInsert(e ui.Event) {
 	}
 }
 
-func normalEvents(e ui.Event) {
+func (fs *FilterScreen) normalEvents(e ui.Event) {
 	switch e.ID {
 	case "q", "<C-c>":
 		ui.Close()
@@ -81,7 +89,7 @@ func normalEvents(e ui.Event) {
 	case "<Left>":
 	case "<Tab>":
 	case "<Enter>":
-		handleEnter()
+		fs.handleEnter()
 	case "<Resize>":
 		payload := e.Payload.(ui.Resize)
 		grid.SetRect(0, 0, payload.Width, payload.Height)
@@ -99,7 +107,10 @@ func selectedList() *widgets.List {
 	return files
 }
 
-func handleEnter() {
+func (fs *FilterScreen) handleEnter() {
+	p := fs.Paths[files.SelectedRow]
+	lines := code.ReadFile(p.Fullpath)
+	area.Rows = append(area.Rows, lines[0])
 }
 
 func setListColors(s *widgets.List) {
