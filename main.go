@@ -1,6 +1,7 @@
 package main
 
 import (
+	"grover/scan"
 	"math/rand"
 	"os"
 	"time"
@@ -17,8 +18,6 @@ func main() {
 
 	if command == "help" {
 	} else if command == "scan" {
-		Scan(os.Args[2])
-	} else if command == "file" {
-		OneFile("/Users/andrewarrow/os/vapor/Sources/Vapor/Application.swift")
+		scan.Scan(os.Args[2])
 	}
 }

@@ -1,8 +1,7 @@
-package main
+package scan
 
 import (
 	"fmt"
-	"grover/swift"
 	"os"
 	"path/filepath"
 	"strings"
@@ -14,9 +13,8 @@ func Scan(dir string) {
 		if err != nil {
 			return err
 		}
-		if strings.HasSuffix(path, ".swift") {
+		if strings.HasSuffix(path, ".kt") {
 			fmt.Println(path)
-			OneFile(path)
 		}
 		return nil
 	}
@@ -25,6 +23,6 @@ func Scan(dir string) {
 }
 
 func OneFile(path string) {
-	characters := swift.ReadFile(path)
-	swift.ProcessCharacters(characters)
+	//characters := swift.ReadFile(path)
+	//swift.ProcessCharacters(characters)
 }
