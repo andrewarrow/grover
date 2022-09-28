@@ -13,8 +13,8 @@ func ReadFile(path string) []string {
 
 	buff := []string{}
 	for _, line := range asLines {
-		trimmed := strings.TrimSpace(line)
-		buff = append(buff, trimmed)
+		//trimmed := strings.TrimSpace(line)
+		buff = append(buff, line)
 	}
 	return buff
 }
