@@ -7,7 +7,8 @@ import (
 )
 
 func Highlight(s string) string {
-	tokens := strings.Split(s, " ")
+	replaced := strings.Replace(s, "\t", " ", -1)
+	tokens := strings.Split(replaced, "  ")
 	buff := []string{}
 	for _, t := range tokens {
 		color := "white"
