@@ -19,16 +19,26 @@ func NewPath(s string) *Path {
 	return &p
 }
 
-func LoadPaths(fullpath string) ([]*Path, bool) {
+func LoadPaths(fullpath string) []*Path {
 	s := files.ReadFile("data/paths.txt")
 	lines := strings.Split(s, "\n")
 	paths := []*Path{}
-	mapForDups := map[string]bool{}
+	moveToTop := false
 	for _, line := range lines {
+		if line == fullpath {
+			moveToTop = true
+			continue
+		}
 		paths = append(paths, NewPath(line))
-		mapForDups[line] = true
 	}
-	return paths, mapForDups[fullpath]
+
+	path := NewPath(fullpath)
+	if moveToTop {
+		paths = append([]*Path{path}, paths...)
+	} else {
+		paths = append(paths, path)
+	}
+	return paths
 }
 
 func WritePaths(paths []*Path) {

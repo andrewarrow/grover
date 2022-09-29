@@ -22,10 +22,7 @@ type FilterScreen struct {
 }
 
 func OnePath(path *Path) {
-	existing, there := LoadPaths(path.Fullpath)
-	if !there {
-		existing = append([]*Path{path}, existing...)
-	}
+	existing := LoadPaths(path.Fullpath)
 	WritePaths(existing)
 	Setup(existing)
 }
