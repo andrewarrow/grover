@@ -21,8 +21,8 @@ type FilterScreen struct {
 	Paths []*Path
 }
 
-func OnePath(path *Path) {
-	existing := LoadPaths(path.Fullpath)
+func OnePath(fullpath string) {
+	existing := LoadPaths(fullpath)
 	WritePaths(existing)
 	Setup(existing)
 }

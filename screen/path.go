@@ -21,6 +21,10 @@ func NewPath(s string) *Path {
 
 func LoadPaths(fullpath string) []*Path {
 	s := files.ReadFile("data/paths.txt")
+	path := NewPath(fullpath)
+	if len(s) == 0 {
+		return []*Path{path}
+	}
 	lines := strings.Split(s, "\n")
 	paths := []*Path{}
 	moveToTop := false
@@ -32,7 +36,6 @@ func LoadPaths(fullpath string) []*Path {
 		paths = append(paths, NewPath(line))
 	}
 
-	path := NewPath(fullpath)
 	if moveToTop {
 		paths = append([]*Path{path}, paths...)
 	} else {

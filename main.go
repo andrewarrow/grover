@@ -26,7 +26,6 @@ func main() {
 		filter := util.GetArg(3)
 		scan.Scan(dir, filter)
 	} else {
-		path := screen.NewPath(arg1)
-		screen.OnePath(path)
+		screen.OnePath(arg1)
 	}
 }
