@@ -43,13 +43,8 @@ func LoadPaths(fullpath string) []*Path {
 
 func WritePaths(paths []*Path) {
 	buff := []string{}
-	mapForDups := map[string]bool{}
 	for _, p := range paths {
-		if mapForDups[p.Fullpath] {
-			continue
-		}
 		buff = append(buff, p.Fullpath)
-		mapForDups[p.Fullpath] = true
 	}
 	payload := strings.Join(buff, "\n")
 	files.SaveFile("data/paths.txt", payload)
