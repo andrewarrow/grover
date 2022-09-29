@@ -1,11 +1,15 @@
 package syntax
 
 import (
-	"fmt"
+	"strings"
 	"testing"
 )
 
 func TestHighlight(t *testing.T) {
-	test1 := Highlight("foo bar")
-	fmt.Println(test1)
+	line := "foo\t\tbar  and     spaces."
+	test1 := Highlight(line)
+	tokens := strings.Split(test1, " ")
+	if len(tokens) != 12 {
+		t.Fatal("wrong length")
+	}
 }
