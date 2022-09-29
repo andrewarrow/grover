@@ -1,6 +1,7 @@
 package main
 
 import (
+	"grover/files"
 	"grover/scan"
 	"grover/screen"
 	"grover/util"
@@ -16,6 +17,7 @@ func main() {
 		PrintHelp()
 		return
 	}
+	files.Mkdir("data")
 	arg1 := os.Args[1]
 
 	if arg1 == "help" {
