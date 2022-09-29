@@ -2,6 +2,7 @@ package main
 
 import (
 	"grover/scan"
+	"grover/screen"
 	"grover/util"
 	"math/rand"
 	"os"
@@ -15,12 +16,15 @@ func main() {
 		PrintHelp()
 		return
 	}
-	command := os.Args[1]
+	arg1 := os.Args[1]
 
-	if command == "help" {
-	} else if command == "scan" {
+	if arg1 == "help" {
+	} else if arg1 == "scan" {
 		dir := util.GetArg(2)
 		filter := util.GetArg(3)
 		scan.Scan(dir, filter)
+	} else {
+		path := screen.NewPath(arg1)
+		screen.OnePath(path)
 	}
 }

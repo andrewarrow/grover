@@ -21,7 +21,15 @@ type FilterScreen struct {
 	Paths []*Path
 }
 
+func OnePath(path *Path) {
+	Setup([]*Path{path})
+}
+
 func Filter(paths []*Path) {
+	Setup(paths)
+}
+
+func Setup(paths []*Path) {
 	if err := ui.Init(); err != nil {
 		log.Fatalf("failed to initialize termui: %v", err)
 	}
