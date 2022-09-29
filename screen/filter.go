@@ -12,7 +12,7 @@ import (
 )
 
 var grid = ui.NewGrid()
-var files = widgets.NewList()
+var fileList = widgets.NewList()
 var area = widgets.NewList()
 var tab = "flavors"
 var insertMode = false
@@ -22,7 +22,10 @@ type FilterScreen struct {
 }
 
 func OnePath(path *Path) {
-	Setup([]*Path{path})
+	existing := LoadPaths()
+	existing = append([]*Path{path}, existing...)
+	WritePaths(existing)
+	Setup(existing)
 }
 
 func Filter(paths []*Path) {
@@ -38,11 +41,11 @@ func Setup(paths []*Path) {
 	fs := FilterScreen{}
 	fs.Paths = paths
 
-	setListColors(files)
+	setListColors(fileList)
 	setListColors(area)
 
 	for _, p := range paths {
-		files.Rows = append(files.Rows, p.Filename)
+		fileList.Rows = append(fileList.Rows, p.Filename)
 	}
 
 	termWidth, termHeight := ui.TerminalDimensions()
@@ -50,7 +53,7 @@ func Setup(paths []*Path) {
 
 	grid.Set(
 		ui.NewRow(1.0,
-			ui.NewCol(0.33, files),
+			ui.NewCol(0.33, fileList),
 			ui.NewCol(0.66, area),
 		),
 	)
@@ -108,16 +111,16 @@ func (fs *FilterScreen) normalEvents(e ui.Event) {
 
 func selectedList() *widgets.List {
 	if tab == "flavors" {
-		return files
+		return fileList
 	} else if tab == "selected" {
-		return files
+		return fileList
 	}
 
-	return files
+	return fileList
 }
 
 func (fs *FilterScreen) handleEnter() {
-	p := fs.Paths[files.SelectedRow]
+	p := fs.Paths[fileList.SelectedRow]
 	lines := code.ReadFile(p.Fullpath)
 	area.Rows = []string{}
 	//for i := 0; i < 10; i++ {
