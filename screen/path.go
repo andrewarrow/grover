@@ -33,10 +33,10 @@ func LoadPaths(fullpath string) []*Path {
 			moveToTop = true
 			continue
 		}
-		paths = append(paths, NewPath(line))
+		paths = append([]*Path{NewPath(line)}, paths...)
 	}
 
-	if moveToTop {
+	if !moveToTop {
 		paths = append([]*Path{path}, paths...)
 	} else {
 		paths = append(paths, path)
