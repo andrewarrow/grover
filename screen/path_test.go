@@ -1,8 +1,12 @@
 package screen
 
-import "testing"
+import (
+	"grover/files"
+	"testing"
+)
 
 func TestLoadExisting(t *testing.T) {
+	files.Mkdir("data")
 	LoadPaths("main.go")
-	// TODO add test logic
+	files.Rmdir("data")
 }
