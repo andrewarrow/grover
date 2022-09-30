@@ -27,22 +27,14 @@ func LoadPaths(fullpath string) []*Path {
 	}
 	lines := strings.Split(s, "\n")
 	paths := []*Path{}
-	//moveToTop := false
 	for _, line := range lines {
 		if line == fullpath {
-			//moveToTop = true
-			//continue
+			continue
 		}
 		paths = append(paths, NewPath(line))
 	}
 
 	paths = append([]*Path{path}, paths...)
-	/*
-		if moveToTop {
-			paths = append([]*Path{path}, paths...)
-		} else {
-			paths = append(paths, path)
-		}*/
 	return paths
 }
 
