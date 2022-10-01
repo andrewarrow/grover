@@ -139,8 +139,10 @@ func (fs *FilterScreen) handleEnter() {
 	area.Rows = []string{}
 	//for i := 0; i < 10; i++ {
 	for _, line := range lines {
+		//area.Rows = append(area.Rows, fmt.Sprintf("%02d %s", len(area.Rows), syntax.Highlight(line)))
 		area.Rows = append(area.Rows, syntax.Highlight(line))
 	}
+	area.SelectedRow = 0
 }
 
 func setListColors(s *widgets.List) {
