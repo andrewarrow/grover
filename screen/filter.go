@@ -14,7 +14,7 @@ import (
 var grid = ui.NewGrid()
 var fileList = widgets.NewList()
 var area = widgets.NewList()
-var tab = "flavors"
+var tab = "files"
 var insertMode = false
 
 type FilterScreen struct {
@@ -97,8 +97,23 @@ func (fs *FilterScreen) normalEvents(e ui.Event) {
 	case "i":
 		insertMode = true
 	case "<Right>":
+		if tab == "files" {
+			tab = "area"
+		} else if tab == "area" {
+			tab = "files"
+		}
 	case "<Left>":
+		if tab == "files" {
+			tab = "area"
+		} else if tab == "area" {
+			tab = "files"
+		}
 	case "<Tab>":
+		if tab == "files" {
+			tab = "area"
+		} else if tab == "area" {
+			tab = "files"
+		}
 	case "<Enter>":
 		fs.handleEnter()
 	case "<Resize>":
@@ -109,10 +124,10 @@ func (fs *FilterScreen) normalEvents(e ui.Event) {
 }
 
 func selectedList() *widgets.List {
-	if tab == "flavors" {
+	if tab == "files" {
 		return fileList
-	} else if tab == "selected" {
-		return fileList
+	} else if tab == "area" {
+		return area
 	}
 
 	return fileList
