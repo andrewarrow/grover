@@ -34,10 +34,14 @@ func evalToken(t string) []*Token {
 	closed := strings.Split(t, ")")
 	newToken := &Token{}
 
-	if len(open) > 0 && len(closed) == 0 {
-	} else if len(closed) > 0 && len(open) == 0 {
-	} else if len(closed) > 0 && len(open) > 0 {
+	if len(open) > 1 && len(closed) == 1 {
+		fmt.Println("1", t)
+	} else if len(open) == 1 && len(closed) > 1 {
+		fmt.Println("2", t)
+	} else if len(open) > 1 && len(closed) > 1 {
+		fmt.Println("3", t)
 	} else {
+		fmt.Println("4", t)
 		newToken.Text = t
 		newToken.Color = color
 		tokens = append(tokens, newToken)
