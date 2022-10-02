@@ -16,34 +16,59 @@ func Highlight(s string) string {
 	tokens := strings.Split(replaced, " ")
 	buff := []string{}
 	for _, t := range tokens {
-		for _, tokenWithColor := range evalToken(t) {
-			buff = append(buff, fmt.Sprintf("[%s](fg:%s)", tokenWithColor.Text,
-				tokenWithColor.Color))
+		for _, withColor := range evalToken(t) {
+			if withColor.Color == "" {
+				buff = append(buff, withColor.Text)
+			} else {
+				buff = append(buff, fmt.Sprintf("[%s](fg:%s)", withColor.Text,
+					withColor.Color))
+			}
 		}
 	}
 	return strings.Join(buff, " ")
 }
 
 func evalToken(t string) []*Token {
-	tokens := []*Token{}
 	color := "white"
 	if rand.Intn(2) == 0 {
 		color = "green"
 	}
+
+	tokens := []*Token{}
+	newToken := &Token{}
+	newToken.Text = t
+	newToken.Color = color
+
+	if t == "" {
+		newToken.Color = ""
+		tokens = append(tokens, newToken)
+		return tokens
+	}
+
 	open := strings.Split(t, "(")
 	closed := strings.Split(t, ")")
-	newToken := &Token{}
 
-	if len(open) > 1 && len(closed) == 1 {
-		fmt.Println("1", t)
-	} else if len(open) == 1 && len(closed) > 1 {
-		fmt.Println("2", t)
+	if len(open) == 2 && len(closed) == 1 {
+		newToken := &Token{}
+		newToken.Text = open[0]
+		newToken.Color = "white"
+		tokens = append(tokens, newToken)
+		newToken = &Token{}
+		newToken.Text = "("
+		newToken.Color = "cyan"
+		tokens = append(tokens, newToken)
+		newToken = &Token{}
+		newToken.Text = open[1]
+		newToken.Color = "white"
+		tokens = append(tokens, newToken)
+	} else if len(open) == 1 && len(closed) == 2 {
 	} else if len(open) > 1 && len(closed) > 1 {
-		fmt.Println("3", t)
 	} else {
-		fmt.Println("4", t)
-		newToken.Text = t
-		newToken.Color = color
+		if t == "func" {
+			newToken.Color = "cyan"
+		} else if t == "string" {
+			newToken.Color = "magenta"
+		}
 		tokens = append(tokens, newToken)
 	}
 
