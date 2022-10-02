@@ -16,10 +16,10 @@ func Highlight(s string) string {
 	tokens := strings.Split(replaced, " ")
 	buff := []string{}
 	for _, t := range tokens {
-		for _, withColor := range evalToken(t) {
-			if withColor.Color == "" {
-				buff = append(buff, withColor.Text)
-			} else {
+		if t == "" {
+			buff = append(buff, "")
+		} else {
+			for _, withColor := range evalToken(t) {
 				buff = append(buff, fmt.Sprintf("[%s](fg:%s)", withColor.Text,
 					withColor.Color))
 			}
@@ -29,6 +29,27 @@ func Highlight(s string) string {
 }
 
 func evalToken(t string) []*Token {
+	tokens := []*Token{}
+	newToken := &Token{}
+	newToken.Text = t
+	newToken.Color = "white"
+
+	for _, c := range t {
+		char := fmt.Sprintf("%c", c)
+		if char == "(" {
+		} else if char == ")" {
+		} else if char == "{" {
+		} else if char == "}" {
+		} else if char == "[" {
+		} else if char == "]" {
+		} else {
+		}
+	}
+	tokens = append(tokens, newToken)
+	return tokens
+}
+
+func evalToken2(t string) []*Token {
 	color := "white"
 	if rand.Intn(2) == 0 {
 		color = "green"
@@ -48,7 +69,7 @@ func evalToken(t string) []*Token {
 	open := strings.Split(t, "(")
 	closed := strings.Split(t, ")")
 
-	if len(open) == 2 && len(closed) == 1 {
+	if len(open) > 1 && len(closed) == 1 {
 		newToken := &Token{}
 		newToken.Text = open[0]
 		newToken.Color = "white"
@@ -61,8 +82,32 @@ func evalToken(t string) []*Token {
 		newToken.Text = open[1]
 		newToken.Color = "white"
 		tokens = append(tokens, newToken)
-	} else if len(open) == 1 && len(closed) == 2 {
-	} else if len(open) > 1 && len(closed) > 1 {
+	} else if len(open) == 1 && len(closed) > 1 {
+		newToken := &Token{}
+		newToken.Text = closed[0]
+		newToken.Color = "white"
+		tokens = append(tokens, newToken)
+		newToken = &Token{}
+		newToken.Text = ")"
+		newToken.Color = "cyan"
+		tokens = append(tokens, newToken)
+		newToken = &Token{}
+		newToken.Text = closed[1]
+		newToken.Color = "white"
+		tokens = append(tokens, newToken)
+	} else if len(open) == 2 && len(closed) == 2 {
+		newToken := &Token{}
+		newToken.Text = open[0]
+		newToken.Color = "white"
+		tokens = append(tokens, newToken)
+		newToken = &Token{}
+		newToken.Text = "("
+		newToken.Color = "cyan"
+		tokens = append(tokens, newToken)
+		newToken = &Token{}
+		newToken.Text = open[1]
+		newToken.Color = "white"
+		tokens = append(tokens, newToken)
 	} else {
 		if t == "func" {
 			newToken.Color = "cyan"

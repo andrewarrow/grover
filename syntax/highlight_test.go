@@ -8,6 +8,7 @@ import (
 
 func TestHighlight(t *testing.T) {
 	line := "\t\tfunc Highlight(s string)  string {"
+	//line := "if !((something && (this || that)) && more)"
 	test := Highlight(line)
 	fmt.Println(len(test), "|"+test+"|")
 	tokens := strings.Split(test, " ")
