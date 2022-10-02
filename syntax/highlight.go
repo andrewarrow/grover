@@ -16,8 +16,8 @@ func Highlight(s string) string {
 	tokens := strings.Split(replaced, " ")
 	buff := []string{}
 	for _, t := range tokens {
-		if t == "" {
-			buff = append(buff, "")
+		if t == "" || strings.Contains(t, "[") || strings.Contains(t, "]") {
+			buff = append(buff, t)
 		} else {
 			for _, withColor := range evalToken(t) {
 				buff = append(buff, fmt.Sprintf("[%s](fg:%s)", withColor.Text,
@@ -42,8 +42,26 @@ func evalToken(t string) []*Token {
 		} else if char == "}" {
 		} else if char == "[" {
 		} else if char == "]" {
+		} else if char == "." {
+		} else if char == "*" {
+		} else if char == "," {
 		} else {
 		}
+	}
+	if t == "func" {
+		newToken.Color = "cyan"
+	} else if t == "string" {
+		newToken.Color = "magenta"
+	} else if t == "type" {
+		newToken.Color = "magenta"
+	} else if t == "struct" {
+		newToken.Color = "magenta"
+	} else if t == "range" {
+		newToken.Color = "magenta"
+	} else if t == "for" {
+		newToken.Color = "cyan"
+	} else if t == "return" {
+		newToken.Color = "cyan"
 	}
 	tokens = append(tokens, newToken)
 	return tokens
