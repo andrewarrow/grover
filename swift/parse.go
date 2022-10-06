@@ -1,7 +1,6 @@
 package swift
 
 import (
-	"fmt"
 	"grover/code"
 	"strings"
 )
@@ -24,12 +23,20 @@ func Parse(file string) SwiftFile {
 
 	chars := code.ReadFileRemoveNewlines(file)
 	words := ProcessCharacters(chars)
-	for i, w := range words {
-		if w == "func" {
-			fmt.Println(words[i+1])
-		}
+	for _, c := range findNext("class", words) {
+		item.Classes = append(item.Classes, Class{c, []Function{}})
 	}
 	return item
+}
+
+func findNext(match string, words []string) []string {
+	items := []string{}
+	for i, w := range words {
+		if w == "class" {
+			items = append(items, words[i+1])
+		}
+	}
+	return items
 }
 
 func ProcessCharacters(characters []string) []string {
