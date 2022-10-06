@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestParse(t *testing.T) {
+func TestParse1(t *testing.T) {
 	item := Parse("example.swift")
 	if len(item.Classes) != 2 {
 		t.Fatal("wrong length")
@@ -17,5 +17,14 @@ func TestParse(t *testing.T) {
 	if name != "RootViewController" {
 		t.Fatal("wrong name", name)
 	}
+}
 
+func TestParse2(t *testing.T) {
+	item := Parse("example.swift")
+	if len(item.Classes[0].Functions) != 1 {
+		t.Fatal("wrong length")
+	}
+	if len(item.Classes[1].Functions) != 4 {
+		t.Fatal("wrong length")
+	}
 }
