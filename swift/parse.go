@@ -5,26 +5,13 @@ import (
 	"strings"
 )
 
-type SwiftFile struct {
-	Classes []Class
-}
-
-type Class struct {
-	Name      string
-	Functions []Function
-}
-
-type Function struct {
-	Name string
-}
-
 func Parse(file string) SwiftFile {
 	item := SwiftFile{}
 
 	chars := code.ReadFileRemoveNewlines(file)
 	words := ProcessCharacters(chars)
 	for _, c := range findNext("class", words) {
-		item.Classes = append(item.Classes, Class{c, []Function{}})
+		item.Classes = append(item.Classes, NewClass(c))
 	}
 	return item
 }

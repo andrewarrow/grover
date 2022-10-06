@@ -13,7 +13,7 @@ func TestParse(t *testing.T) {
 	if name != "AnotherClass" {
 		t.Fatal("wrong name", name)
 	}
-	name = item.Classes[0].Name
+	name = item.Classes[1].Name
 	if name != "RootViewController" {
 		t.Fatal("wrong name", name)
 	}
