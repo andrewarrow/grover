@@ -1,7 +1,11 @@
 package swift
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestParse(t *testing.T) {
-	Parse("example.swift")
+	items := Parse("example.swift")
+	fmt.Println(items)
 }
