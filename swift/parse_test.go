@@ -6,6 +6,6 @@ import (
 )
 
 func TestParse(t *testing.T) {
-	items := Parse("example.swift")
-	fmt.Println(items)
+	item := Parse("example.swift")
+	fmt.Println(item)
 }

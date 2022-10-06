@@ -6,7 +6,12 @@ import (
 	"strings"
 )
 
-type Item struct {
+type SwiftFile struct {
+	Classes []Class
+}
+
+type Class struct {
+	Name      string
 	Functions []Function
 }
 
@@ -14,8 +19,8 @@ type Function struct {
 	Name string
 }
 
-func Parse(file string) []Item {
-	items := []Item{}
+func Parse(file string) SwiftFile {
+	item := SwiftFile{}
 
 	chars := code.ReadFileRemoveNewlines(file)
 	words := ProcessCharacters(chars)
@@ -24,7 +29,7 @@ func Parse(file string) []Item {
 			fmt.Println(words[i+1])
 		}
 	}
-	return items
+	return item
 }
 
 func ProcessCharacters(characters []string) []string {

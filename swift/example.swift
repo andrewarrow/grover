@@ -10,6 +10,11 @@ import ReactiveCocoa
 import ReactiveSwift
 import UIKit
 
+class AnotherClass: Foo {
+    func bar() {
+    }
+}
+
 class RootViewController: UIViewController {
     private let welcomeView: WelcomeView
 
