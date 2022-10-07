@@ -1,6 +1,7 @@
 package swift
 
 import (
+	"fmt"
 	"regexp"
 )
 
@@ -29,4 +30,11 @@ func NewClass(name string) Class {
 	m := regexp.MustCompile(`[^a-zA-Z0-9\s]`)
 	c.Name = m.ReplaceAllString(name, "")
 	return c
+}
+
+func (b *Block) printBlocks(tab string) {
+	fmt.Println(tab, b.Text)
+	for _, block := range b.Blocks {
+		block.printBlocks(tab + "  ")
+	}
 }

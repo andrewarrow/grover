@@ -1,7 +1,6 @@
 package swift
 
 import (
-	"fmt"
 	"grover/code"
 	"strings"
 )
@@ -11,7 +10,7 @@ func Parse(file string) Block {
 
 	chars := code.ReadFileRemoveNewlines(file)
 	findBlocks(chars, &item)
-	fmt.Println(item)
+	item.printBlocks("")
 	/*
 		words := ProcessCharacters(chars)
 		for _, c := range findNext("class", words) {
