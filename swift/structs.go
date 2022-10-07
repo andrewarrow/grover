@@ -4,8 +4,9 @@ import (
 	"regexp"
 )
 
-type SwiftFile struct {
-	Classes []Class
+type Block struct {
+	Text   string
+	Blocks []*Block
 }
 
 type Class struct {
@@ -15,6 +16,12 @@ type Class struct {
 
 type Function struct {
 	Name string
+}
+
+func NewBlock(text string) Block {
+	b := Block{}
+	b.Text = text
+	return b
 }
 
 func NewClass(name string) Class {
