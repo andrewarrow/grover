@@ -3,7 +3,7 @@ package swift
 import "testing"
 
 func TestParse1(t *testing.T) {
-	Parse("small_example.swift")
+	Parse("medium_example.swift")
 }
 
 /*

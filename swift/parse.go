@@ -30,6 +30,7 @@ func findBlocks(characters []string, block *Block) {
 			text = []string{}
 		} else if c == "}" {
 			stack = stack[0 : len(stack)-1]
+			text = []string{}
 		} else {
 			text = append(text, c)
 		}

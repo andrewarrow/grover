@@ -3,6 +3,7 @@ package swift
 import (
 	"fmt"
 	"regexp"
+	"strings"
 )
 
 type Block struct {
@@ -21,7 +22,7 @@ type Function struct {
 
 func NewBlock(text string) Block {
 	b := Block{}
-	b.Text = text
+	b.Text = strings.TrimSpace(text)
 	return b
 }
 
