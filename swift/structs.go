@@ -33,7 +33,7 @@ func NewClass(name string) Class {
 }
 
 func (b *Block) printBlocks(tab string) {
-	fmt.Println(tab, b.Text)
+	fmt.Println(tab, "|"+b.Text+"|")
 	for _, block := range b.Blocks {
 		block.printBlocks(tab + "  ")
 	}
